@@ -15,7 +15,7 @@ module nygame::nygame{
     // Constants
     //==============================================================================================
     const STAKE: u64 = 1000000000;
-    const STAKE_COST: vector<u64> = vector[10000000, 100000000, 300000000, 500000000, 600000000, 800000000];
+    const STAKE_COST: vector<u64> = vector[10000000, 100000000, 200000000, 330000000, 500000000, 800000000];
 
     //==============================================================================================
     // Error codes
@@ -48,7 +48,7 @@ module nygame::nygame{
         balance: Balance<SUI>,
         games: Table<String, Game>,
     }
-    public struct AdminCap has key {
+    public struct AdminCap has key, store {
         id: UID
     }
 
@@ -82,7 +82,7 @@ module nygame::nygame{
         let admin_cap = AdminCap {
             id: object::new(ctx)
         };
-        transfer::transfer(admin_cap, tx_context::sender(ctx))
+        transfer::public_transfer(admin_cap, tx_context::sender(ctx))
     }
 
     public fun add_balance(_coin: Coin<SUI>, state: &mut State) {
