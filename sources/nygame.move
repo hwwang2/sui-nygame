@@ -177,6 +177,14 @@ module nygame::nygame{
         let coin = coin::take(&mut state.balance, total_balance-STAKE*2, ctx);
         transfer::public_transfer(coin, tx_context::sender(ctx));
     }
+
+    //==============================================================================================
+    // Helper Functions 
+    //==============================================================================================
+    #[test_only]
+    public fun init_for_testing(ctx: &mut TxContext) {
+        init(ctx);
+    }
 }
 
 
