@@ -114,7 +114,7 @@ module nygame::nygame{
         });
     }
 
-    public entry fun guess(gid: String, 
+    public fun guess(gid: String, 
         ges: String, 
         state: &mut State,
         u_coin: Coin<SUI>,
@@ -169,7 +169,7 @@ module nygame::nygame{
         hash::keccak256(gid.as_bytes()) == gm.sign
     }
 
-    public entry fun withdraw(state: &mut State, _admin_cap: &AdminCap, ctx: &mut TxContext) {
+    public fun withdraw(state: &mut State, _admin_cap: &AdminCap, ctx: &mut TxContext) {
         // only the house address can withdraw funds
         // assert!(tx_context::sender(ctx) == house_data.house, ECallerNotHouse);
         let total_balance = balance::value(&state.balance);
