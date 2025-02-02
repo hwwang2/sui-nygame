@@ -121,11 +121,11 @@ module nygame::nygame{
         ctx: &mut TxContext){
         assert!(table::contains(&state.games, gid), EGameNotExist);
         let cnt = vector::length(&state.games[gid].guesses);
-        assert!(cnt<=6, EGameOverGuess);
+        assert!(cnt<=5, EGameOverGuess);
         let mut front_index = 0;
         while (front_index < cnt) {
-            front_index = front_index + 1;
             assert!(state.games[gid].guesses[front_index].guess!=ges, EGameGuessRepeat);
+            front_index = front_index + 1;
         };
         assert!(coin::value(&u_coin) >= STAKE_COST[cnt-1], EInsufficientBalance);
         balance::join(&mut state.balance, coin::into_balance(u_coin));
