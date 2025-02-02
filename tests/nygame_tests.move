@@ -9,7 +9,7 @@ module nygame::nygame_tests{
     use sui::test_utils::assert_eq;
     use std::string;
     use sui::hash::{Self};
-    use sui::coin::{Coin, TreasuryCap};
+    use sui::coin::{Self, Coin, TreasuryCap};
     use sui::sui::SUI;
 
     const ENotImplemented: u64 = 0;
@@ -61,13 +61,14 @@ module nygame::nygame_tests{
 
         {
             let mut state = test_scenario::take_shared<State>(&scenario);
-            let si = test_scenario::take_from_sender<Coin<SUI>>(&scenario);
+            let mut payment = coin::mint_for_testing<SUI>(10000000, scenario.ctx());
+            // let si = test_scenario::take_from_sender<Coin<SUI>>(&scenario);
             // let coin = test_scenario::take_from_sender<Coin<MANAGED>>(&scenario);
             nygame::guess(
                 gid, 
                 word, 
                 &mut state,
-                si,
+                payment,
                 scenario.ctx()
             );
             // test_scenario::return_to_sender(&scenario, si);

@@ -127,7 +127,7 @@ module nygame::nygame{
             assert!(state.games[gid].guesses[front_index].guess!=ges, EGameGuessRepeat);
             front_index = front_index + 1;
         };
-        assert!(coin::value(&u_coin) >= STAKE_COST[cnt-1], EInsufficientBalance);
+        assert!(coin::value(&u_coin) >= STAKE_COST[cnt], EInsufficientBalance);
         balance::join(&mut state.balance, coin::into_balance(u_coin));
         state.games[gid].guesses.push_back(Guess{
             guess: ges,
